@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/lyrics-finder/static/css/main.00fb4c61.css",
-    "main.js": "/lyrics-finder/static/js/main.c89f5f5f.js",
+    "main.css": "/lyrics-finder/static/css/main.01ef2b4a.css",
+    "main.js": "/lyrics-finder/static/js/main.35268234.js",
     "static/js/453.1c0b67b6.chunk.js": "/lyrics-finder/static/js/453.1c0b67b6.chunk.js",
     "static/media/logo.png": "/lyrics-finder/static/media/logo.c13eed0c9db425d802c8.png",
     "index.html": "/lyrics-finder/index.html",
-    "main.00fb4c61.css.map": "/lyrics-finder/static/css/main.00fb4c61.css.map",
-    "main.c89f5f5f.js.map": "/lyrics-finder/static/js/main.c89f5f5f.js.map",
+    "main.01ef2b4a.css.map": "/lyrics-finder/static/css/main.01ef2b4a.css.map",
+    "main.35268234.js.map": "/lyrics-finder/static/js/main.35268234.js.map",
     "453.1c0b67b6.chunk.js.map": "/lyrics-finder/static/js/453.1c0b67b6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00fb4c61.css",
-    "static/js/main.c89f5f5f.js"
+    "static/css/main.01ef2b4a.css",
+    "static/js/main.35268234.js"
   ]
 }
