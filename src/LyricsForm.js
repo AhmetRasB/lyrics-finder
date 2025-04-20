@@ -1,110 +1,106 @@
-import React, { useState } from "react";
-import "./App.css";
-import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './LyricsForm.css';
 
-function App() {
-  const [lyrics, setLyrics] = useState("");
+const LyricsForm = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [lyrics, setLyrics] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showHelp, setShowHelp] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const [error, setError] = useState(false);
+
+  const toastifyError = () => {
+    toast.error('Lyrics not found!', {
+      position: 'bottom-right',
+      autoClose: 3000,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
 
   const onSubmit = async (data) => {
+    const { artist, title } = data;
     setLoading(true);
-    setLyrics("");
+    setLyrics('');
+    setError(false);
+
     try {
-      const res = await fetch(
-        `https://api.lyrics.ovh/v1/${data.artist}/${data.title}`
-      );
+      const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
       const json = await res.json();
+
       if (json.lyrics) {
         setLyrics(json.lyrics);
       } else {
-        setLyrics("Not found 😔");
+        setError(true);
+        toastifyError();
       }
-    } catch {
-      setLyrics("Not found 😔");
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+      toastifyError();
     }
+    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-blue-200 flex flex-col items-center justify-start px-4 py-8 space-y-4">
-      <img src="/logo.png" alt="Lyrics Finder Logo" className="w-40 mb-2" />
-      <h1 className="text-3xl font-bold text-center text-blue-900">
-        Lyrics Finder
-      </h1>
+    <div className="container">
+      <form onSubmit={handleSubmit(onSubmit)} className="form">
+        <div className="input-group floating">
+          <input
+            id="artist"
+            type="text"
+            placeholder=" "
+            className="formInput"
+            {...register('artist', { required: true })}
+          />
+          <label htmlFor="artist">Artist</label>
+        </div>
 
-      {/* Help Icon */}
-      <button
-        onClick={() => setShowHelp(true)}
-        className="text-xl text-blue-700 hover:text-blue-900"
-        title="How to use?"
-      >
-        ❓
-      </button>
+        <div className="input-group floating">
+          <input
+            id="title"
+            type="text"
+            placeholder=" "
+            className="formInput"
+            {...register('title', { required: true })}
+          />
+          <label htmlFor="title">Song Title</label>
+        </div>
 
-      {/* Form */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md bg-white p-6 rounded-2xl shadow-lg space-y-4"
-      >
-        <input
-          placeholder="Artist"
-          {...register("artist", { required: true })}
-          className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none"
-        />
-        <input
-          placeholder="Song title"
-          {...register("title", { required: true })}
-          className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className={`w-full p-3 rounded-xl text-white font-semibold transition ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
-        >
-          {loading ? "Loading..." : "Find Lyrics"}
+        <button className="submit-btn" type="submit" disabled={loading}>
+          {loading ? 'Searching...' : 'Find Lyrics'}
         </button>
       </form>
 
-      {/* Lyrics Output */}
-      <div className="w-full max-w-md bg-white p-6 rounded-2xl shadow-md whitespace-pre-wrap min-h-[150px] text-gray-700 text-sm">
-        {lyrics || "Lyrics will appear here."}
+      <div className="lyrics-container">
+        {loading ? (
+          <span>Loading...</span>
+        ) : error ? (
+          <span style={{ color: 'red' }}>Lyrics not found.</span>
+        ) : lyrics ? (
+          <pre>{lyrics}</pre>
+        ) : (
+          'Lyrics will appear here.'
+        )}
       </div>
 
-      {/* Help Modal */}
-      {showHelp && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 max-w-md w-full space-y-4">
-            <h2 className="text-xl font-bold">Nasıl Kullanılır? / How to Use</h2>
-            <p className="text-sm text-gray-700">
-              🎤 Şarkıcı ve şarkı ismini yazın ve “Find Lyrics” butonuna basın. <br />
-              🎵 Şarkı sözleri aşağıda görünecek.
-            </p>
-            <p className="text-sm text-gray-700 mt-2">
-              🎤 Type artist and song title, then press “Find Lyrics”. <br />
-              🎵 Lyrics will appear below.
-            </p>
-            <button
-              className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-xl"
-              onClick={() => setShowHelp(false)}
-            >
-              Kapat / Close
-            </button>
-          </div>
-        </div>
-      )}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        pauseOnHover
+        draggable
+        containerId="A"
+      />
 
-      <ToastContainer />
+      <footer className="footer">
+        Made with 💚 by <a href="https://github.com/AhmetRasB" target="_blank" rel="noopener noreferrer">AhmetRasB</a>
+        &nbsp;|&nbsp;
+        <a href="https://www.linkedin.com/in/ahmetrasimbeyhan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      </footer>
     </div>
   );
-}
+};
 
-export default App;
+export default LyricsForm;
