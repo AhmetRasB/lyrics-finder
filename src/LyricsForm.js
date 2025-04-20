@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './LyricsForm.css'; // Aşağıdaki CSS dosyasını ayrı olarak oluştur
+import './LyricsForm.css';
 
 const LyricsForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [lyrics, setLyrics] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (prefersDark) {
-      document.body.classList.add('dark');
-      setIsDark(true);
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    document.body.classList.toggle('dark');
-    setIsDark(!isDark);
-  };
+  const [error, setError] = useState(false);
 
   const toastifyError = () => {
     toast.error('Lyrics not found!', {
@@ -35,6 +22,9 @@ const LyricsForm = () => {
   const onSubmit = async (data) => {
     const { artist, title } = data;
     setLoading(true);
+    setLyrics('');
+    setError(false);
+
     try {
       const res = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
       const json = await res.json();
@@ -42,11 +32,12 @@ const LyricsForm = () => {
       if (json.lyrics) {
         setLyrics(json.lyrics);
       } else {
-        setLyrics('');
+        setError(true);
         toastifyError();
       }
     } catch (err) {
       console.error(err);
+      setError(true);
       toastifyError();
     }
     setLoading(false);
@@ -54,10 +45,6 @@ const LyricsForm = () => {
 
   return (
     <div className="container">
-      <button onClick={toggleTheme} className="theme-toggle">
-        {isDark ? '☀️ Light Mode' : '🌙 Dark Mode'}
-      </button>
-
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         <div className="input-group floating">
           <input
@@ -87,7 +74,15 @@ const LyricsForm = () => {
       </form>
 
       <div className="lyrics-container">
-        {lyrics ? <pre>{lyrics}</pre> : 'Lyrics will appear here.'}
+        {loading ? (
+          <span>Loading...</span>
+        ) : error ? (
+          <span style={{ color: 'red' }}>Lyrics not found.</span>
+        ) : lyrics ? (
+          <pre>{lyrics}</pre>
+        ) : (
+          'Lyrics will appear here.'
+        )}
       </div>
 
       <ToastContainer
