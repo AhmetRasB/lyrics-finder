@@ -5,7 +5,6 @@ Lyrics Finder, bir şarkının sözlerini bulmanızı sağlayan basit ve modern 
 ## 📸 Önizleme
 
 ![Lyrics Finder Screenshot](/readme_imgs/image.png)  
-_Aşağıda uygulamanın nasıl çalıştığını gösteren bir GIF ekleyebilirsiniz:_
 
 ![Lyrics Finder Demo](/readme_imgs/test.gif)
 
@@ -35,3 +34,4 @@ Aşağıdaki adımlarla projeyi yerelde çalıştırabilirsiniz:
 ```bash
 git clone https://github.com/AhmetRasB/lyrics-finder.git
 cd lyrics-finder
+npm run
