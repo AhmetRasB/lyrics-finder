@@ -3,12 +3,32 @@ import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './LyricsForm.css';
+import './HelpModal.css';
+import logo from '../src/logo.png';
+
+const HelpModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <h2>How to Use Lyrics Finder</h2>
+        <p>
+          Just type the artist name and song title into the input fields, then click on "Find Lyrics".
+          If lyrics are found, they will appear below. Otherwise, you will see a "Lyrics not found" message.
+        </p>
+        <button onClick={onClose} className="close-btn">Close</button>
+      </div>
+    </div>
+  );
+};
 
 const LyricsForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit } = useForm();
   const [lyrics, setLyrics] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   const toastifyError = () => {
     toast.error('Lyrics not found!', {
@@ -45,6 +65,12 @@ const LyricsForm = () => {
 
   return (
     <div className="container">
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <img src={logo} alt="Lyrics Finder Logo" className="logo" />
+      </div>
+
+      <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         <div className="input-group floating">
           <input
@@ -71,6 +97,17 @@ const LyricsForm = () => {
         <button className="submit-btn" type="submit" disabled={loading}>
           {loading ? 'Searching...' : 'Find Lyrics'}
         </button>
+
+        <div className="help-button-container">
+          <button
+            type="button"
+            className="help-btn"
+            onClick={() => setIsHelpOpen(true)}
+            title="How to use?"
+          >
+            ❓
+          </button>
+        </div>
       </form>
 
       <div className="lyrics-container">
