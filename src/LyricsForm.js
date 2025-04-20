@@ -29,6 +29,7 @@ const LyricsForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+  const [copied, setCopied] = useState(false); // New state for copy feedback
 
   const toastifyError = () => {
     toast.error('Lyrics not found!', {
@@ -37,6 +38,22 @@ const LyricsForm = () => {
       pauseOnHover: true,
       draggable: true
     });
+  };
+
+  const toastifyCopied = () => {
+    toast.success('Lyrics copied to clipboard!', {
+      position: 'bottom-right',
+      autoClose: 2000,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(lyrics);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+    toastifyCopied();
   };
 
   const onSubmit = async (data) => {
@@ -111,6 +128,12 @@ const LyricsForm = () => {
       </form>
 
       <div className="lyrics-container">
+        {lyrics && (
+          <button className="copy-btn" onClick={handleCopy} title="Copy lyrics">
+            {copied ? '✅ Copied!' : '📋 Copy'}
+          </button>
+        )}
+
         {loading ? (
           <span>Loading...</span>
         ) : error ? (

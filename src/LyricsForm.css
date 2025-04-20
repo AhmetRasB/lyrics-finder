@@ -201,3 +201,20 @@ body {
     font-size: 20px;
   }
 }
+.copy-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--highlight);
+  cursor: pointer;
+  float: right;
+  margin-bottom: 10px;
+  margin-top: -10px; /* Adjust position slightly */
+  margin-right: 8px; /* Move closer to the right */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.copy-btn:hover {
+  transform: scale(1.1);
+  color: #0e9f6e; /* Slightly darker green */
+}
