@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Theme Variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --input-bg: #f9f9f9;
+  --input-border: #10b981;
+  --highlight: #10b981;
+}
+
+body.dark {
+  --bg-color: #111111;
+  --text-color: #ffffff;
+  --input-bg: #111111;
+  --input-border: #10b981;
+  --highlight: #10b981;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.theme-toggle {
+  margin-bottom: 30px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: var(--highlight);
+  color: black;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: #0e9f6e;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.input-group {
+  position: relative;
+}
+
+.floating input {
+  width: 100%;
+  padding: 1.25rem 0.75rem 0.5rem;
+  background-color: var(--input-bg);
+  border: 2px solid var(--input-border);
+  border-radius: 8px;
+  color: var(--highlight);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.floating label {
+  position: absolute;
+  top: 1.1rem;
+  left: 0.75rem;
+  color: #aaa;
+  background-color: var(--input-bg);
+  padding: 0 6px;
+  transition: all 0.3s ease;
+  transform-origin: left top;
+  pointer-events: none;
+}
+
+.floating input:focus + label,
+.floating input:not(:placeholder-shown) + label {
+  top: -1.1rem;
+  left: 0.65rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--highlight);
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background-color: var(--highlight);
+  color: black;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.lyrics-container {
+  margin-top: 40px;
+  background: transparent;
+  color: var(--highlight);
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 1.25rem;
+  line-height: 2;
+  font-weight: 500;
+  text-align: center;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.footer a {
+  color: var(--highlight);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
