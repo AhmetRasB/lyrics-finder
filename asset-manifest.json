@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/lyrics-finder/static/css/main.820697e0.css",
+    "main.css": "/lyrics-finder/static/css/main.63d69b4e.css",
     "main.js": "/lyrics-finder/static/js/main.19cac7fa.js",
     "index.html": "/lyrics-finder/index.html",
-    "main.820697e0.css.map": "/lyrics-finder/static/css/main.820697e0.css.map",
+    "main.63d69b4e.css.map": "/lyrics-finder/static/css/main.63d69b4e.css.map",
     "main.19cac7fa.js.map": "/lyrics-finder/static/js/main.19cac7fa.js.map"
   },
   "entrypoints": [
-    "static/css/main.820697e0.css",
+    "static/css/main.63d69b4e.css",
     "static/js/main.19cac7fa.js"
   ]
 }
