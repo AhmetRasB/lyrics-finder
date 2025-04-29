@@ -97,36 +97,11 @@ This project uses the [lyrics.ovh](https://lyrics.ovh/) API to fetch song lyrics
 
 This project is licensed under the MIT License.
 
-## 📸 Önizleme
+## 📸 Preview
 
 ![Lyrics Finder Screenshot](/readme_imgs/image.png)  
 
 ![Lyrics Finder Demo](/readme_imgs/test.gif)
 
-## 🚀 Özellikler
 
-- 🎵 Şarkıcı ve şarkı adına göre şarkı sözü bulma
-- 🌙 Açık ve koyu tema desteği
-- 📱 Mobil uyumlu tasarım (responsive)
-- ❓ Yardım modalı (kullanım bilgisi)
-![Lyrics Finder Fail Demo](/readme_imgs/false.gif)
-- ⚡ Hızlı ve sade kullanıcı arayüzü
 
-## 🧑‍💻 Kullanılan Teknolojiler
-
-- React
-- CSS (custom + responsive)
-- [lyrics.ovh API](https://lyrics.ovh)
-
----
-
-## 🔧 Kurulum ve Çalıştırma
-
-Aşağıdaki adımlarla projeyi yerelde çalıştırabilirsiniz:
-
-### 1. Repoyu klonlayın
-
-```bash
-git clone https://github.com/AhmetRasB/lyrics-finder.git
-cd lyrics-finder
-npm run
