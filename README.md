@@ -1,6 +1,4 @@
 # 🎵 Lyrics Finder
-I don't know about frontend, the design part was difficult :)
-Readme written by cursor
 A modern, responsive web application to find lyrics for your favorite songs. Built with React and styled with a Spotify-inspired theme.
 
 ![Lyrics Finder Logo](src/assets/images/logo.png)
@@ -20,7 +18,7 @@ A modern, responsive web application to find lyrics for your favorite songs. Bui
 
 ## 🚀 Live Demo
 
-[View Live Demo](https://github.com/AhmetRasB) 
+[View Live Demo](https://ahmetrasb.github.io/lyrics-finder/) 
 
 ## 🛠️ Technologies Used
 
